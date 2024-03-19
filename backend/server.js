@@ -35,7 +35,6 @@ app.get('/files', async (_, res) => {
 app.post('/files/upload', upload.single('file'), async (req, res) => {
     try {
         const { originalname, mimetype, buffer } = req.file;
-        console.log(req.file);
 
         const savedFile = await prisma.file.create({
             data: {
