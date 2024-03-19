@@ -50,36 +50,30 @@ export const downloadFile = async (fileId: string, fileTitle: string, fileExtens
                 case FileExtension.JPG:
                 case FileExtension.PNG:
                 case FileExtension.BMP: {
-                    // const image = new Image();
-                    // image.src = urlObject;
-                    // document.body.appendChild(image);
                     return urlObject;
                 }
 
                 case FileExtension.PDF: {
-                    // const iframe = document.createElement('iframe');
-                    // iframe.src = urlObject;
-                    // document.body.appendChild(iframe);
                     return urlObject;
                 }
 
                 case FileExtension.DOC:
                 case FileExtension.DOCX:
                 case FileExtension.MSG:
-                case FileExtension.XLSX:
+                case FileExtension.XLSX: {
                     console.log('Preview DOC, DOCX, XLSX, MSG file');
-                    // Implement preview using third-party libraries or services
+                    const link = document.createElement('a');
+                    link.href = urlObject;
+                    link.download = `${fileTitle}.${fileExtension}`;
+                    document.body.appendChild(link);
+                    link.click();
+                    document.body.removeChild(link);
+                    link.remove();
                     break;
+                }
                 default:
                     throw new Error('File extension not supported');
             }
-            // const link = document.createElement('a');
-            // link.href = urlObject;
-            // link.download = `${fileTitle}.${fileExtension}`;
-            // document.body.appendChild(link);
-            // link.click();
-            // document.body.removeChild(link);
-            // link.remove();
         } else {
             throw new Error('Error downloading file');
         }
