@@ -41,8 +41,8 @@ const Modal = ({
     imageUrl: string | null;
     fileUrl: string | null;
 }) => {
-    const divRef = useClickOutside<HTMLIFrameElement>(onClose);
-    const imgRef = useClickOutside<HTMLImageElement>(onClose);
+    const iframeNode = useClickOutside<HTMLIFrameElement>(onClose);
+    const imgNode = useClickOutside<HTMLImageElement>(onClose);
 
     return (
         isOpen && (
@@ -56,10 +56,12 @@ const Modal = ({
                             src={imageUrl}
                             alt='Preview'
                             style={{ maxWidth: '100%', maxHeight: '800px' }}
-                            ref={imgRef}
+                            ref={imgNode}
                         />
                     )}
-                    {fileUrl && <iframe src={fileUrl} title='PDF Preview' width='1500px' height='850px' ref={divRef} />}
+                    {fileUrl && (
+                        <iframe src={fileUrl} title='PDF Preview' width='1500px' height='850px' ref={iframeNode} />
+                    )}
                 </div>
             </div>
         )
