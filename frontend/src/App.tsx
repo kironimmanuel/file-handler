@@ -31,12 +31,13 @@ function App() {
         }
 
         const result = await downloadFile(fileId, fileTitle, fileExtension as FileExtension);
+        const imageExtensions = [FileExtension.JPG, FileExtension.JPEG, FileExtension.PNG, FileExtension.BMP];
 
-        if (fileExtension === 'jpeg' || fileExtension === 'jpg' || fileExtension === 'png') {
+        if (imageExtensions.includes(fileExtension as FileExtension)) {
             result && handleImagePreview(result);
         }
 
-        if (fileExtension === 'pdf') {
+        if (fileExtension === FileExtension.PDF) {
             result && handlePDFPreview(result);
         }
     };
